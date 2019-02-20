@@ -36,16 +36,16 @@ window.addEventListener('DOMContentLoaded', () => {
 			trigger.remove();
 
 			showConfirm();
-			calcGoods(1);
+			
 
 			removeBtn.classList.add('goods__item-remove');
 			removeBtn.innerHTML = '&times';
 			item.appendChild(removeBtn);
 
 			cartWrapper.appendChild(item);
-			
+			calcGoods();
 			if (empty){
-				empty.style.display = 'none';
+				empty.remove();
 			}
 			calcTotal();
 			removeFromCart();				
@@ -86,10 +86,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	}
 
-	function calcGoods(i) {
+	function calcGoods() {
 		const items = cartWrapper.querySelectorAll('.goods__item');
-
-		badge.textContent = i + items.length;		
+		badge.textContent = items.length;
+		// Home work #2
+		if (badge.textContent == 0) {
+			let empty = document.createElement('div');
+			empty.classList.add('empty');
+			empty.textContent = 'Ваша корзина пока пуста';
+			cartWrapper.appendChild(empty);
+		}	
 	};
 
 
